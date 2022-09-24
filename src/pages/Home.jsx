@@ -8,7 +8,7 @@ const Home = () => {
         <img src= {HeroImage} className="fixed md: w-screen h-screen object-cover -z-10 pointer-events-none"/>
         <div className="absolute left-1/2 top-1/3 m-auto w-1/3 md:w-1/3 h-1/5">  
         <h1 className="font-bold text-xs sm:text-md md:text-4xl text-left p-5 bg-white/80 shadow-xl rounded-xl">
-            <span className="text-blue-500">Project task management</span> for small teams, <span className="text-blue-500">made easy</span>.
+            <span className="text-blue-500">Project task management</span> for productive teams, <span className="text-blue-500">made easy</span>.
             </h1>   
         <h1 className="text-right font-bold text-xs sm:text-md lg:text-lg font-bold p-5 mt-2 bg-white rounded-xl text-shadow-md">
             <span className="text-blue-500">Eliminate</span> problems and 

@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout'
+import TestimonySlider from '../components/TestimonySlider'
 
 const About = () => {
   return (
@@ -15,13 +16,17 @@ const About = () => {
                     <br/>
                     See which tasks have been delegated to each team member, set priority levels for various tasks, 
                     add comments to posts or leave a message for a team member. You'll no longer have to worry about whether
-                     or not you've confirmed a deadline with a teammate via Outlook or Google Calendar.
+                     or not you've confirmed a deadline with a teammate via Outlook or Google Calendar. Exploring your options?
+                     We also have a generous free tier for small business, entrepreneurs and small working teams.
                     <br/>
                     <br/>
                 </span>
+                <button className="bg-gray-100 px-4 py-2 text-xl rounded-xl font-bold">Check out our pricing here.</button>
                 </div>
-                <h1 className="text-6xl font-bold text-center pb-5 pt-5">See what our customers are saying:</h1>
+                <h1 className="text-6xl font-bold text-center pb-5 pt-5 mt-20">See what our customers are saying:</h1>
+              <TestimonySlider/>
         </div>
+        <div className="p-5"></div>
     </Layout>
   )
 }

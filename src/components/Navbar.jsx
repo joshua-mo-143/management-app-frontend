@@ -13,7 +13,7 @@ const Navbar = () => {
                 <Link to="/about">[ About ]</Link>
             </li>
             <li className="py-2 px-5">
-                [ Pricing ] 
+                <Link to="/pricing">[ Pricing ]</Link>
             </li>
             <li className="bg-blue-500 py-2 px-5 rounded-xl">
                 <Link to="/dashboard">Customer Login</Link>
