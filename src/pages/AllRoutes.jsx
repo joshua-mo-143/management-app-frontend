@@ -4,6 +4,8 @@ import About from './About';
 import Home from './Home';
 import Dashboard from './Dashboard/Dashboard';
 import Pricing from './Pricing';
+import Register from './Register';
+import Login from './Login';
 
 const AllRoutes = () => {
 
@@ -13,6 +15,8 @@ const AllRoutes = () => {
             <Route path="/about" element={<About/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/pricing" element={<Pricing/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
         </Routes>
   )
 }

@@ -1,16 +1,37 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { data } from 'autoprefixer';
 import Layout from '../../components/Layout';
-
+import Task from '../../components/Task';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import NewTaskForm from '../../components/NewTaskForm';
 
 const Dashboard = (props) => {
 
+    // set states
     const [todo, setTodo] = useState([]);
+    const [task, setTask] = useState("");
+    const [showTaskForm, toggleTaskForm] = useState(false);
 
+    // set vars
     let data;
     let fetchUrl = 'http://localhost:3000/tasks';
 
+    // set functions for buttons
+    const showTask = (e) => {
+
+        toggleTaskForm(false)
+        setTask(e.target.getAttribute("data-index"));
+    }
+
+    const showNewTaskForm = () => {
+        setTask("")
+        toggleTaskForm(true)
+    }
+
+
+
+    // send Axios query to API to get data
     useEffect(() => {
         async function getData() {
             await axios.get(fetchUrl)
@@ -24,30 +45,38 @@ const Dashboard = (props) => {
             }
             getData();
         },
-        []);
+        [todo]);
 
-        console.log(todo);
   return (
     <Layout>
-    <h1 className="mt-20 text-center font-bold text-3xl">Dashboard</h1>
-    <div className="flex flex-col gap-5 mt-5 w-2/5 border border-8 ml-5">
-        <article className="mx-10">
-            <div className="p5-block">
-                <h3 className="text-xl ml-5 mt-5"> + Make a new objective?</h3>
+    <h1 className="mt-20 text-center font-bold text-3xl">Dashboard - Guest</h1>
+    <div className="flex flex-row mt-5 gap-5 justify-center">
+    <div className="flex flex-col gap-5 w-2/5 border border-8 ml-5 pb-5">
+            <div className="px-5 py-3 block m-5 mb-0 bg-green-500 shadow-md rounded-xl cursor-pointer" onClick={showNewTaskForm}>
+                <h3 className="text-xl ml-5 font-bold"> <FontAwesomeIcon icon={faPlus}/>  Make a new task</h3>
             </div>
-        </article>
     {todo.map(x => (
-        <article key={x._id} className="mx-10">
-        <div className="p-5 block">
+        <div key={x._id} className={x.taskCompleted == true ? "mx-10 p-3 bg-green-500 rounded-xl shadow-sm" : "mx-10 p-3 bg-white/50 rounded-xl shadow-sm"}>
+        <div className="relative block">
+            {x.taskCompleted == true ? 
+                <h1 className="absolute right-0 font-bold">Completed!</h1> : ""}
             <h2 className="text-3xl">{x.taskName}</h2>
-            <p>{x.taskDesc}</p>
-            <p className="text-gray-300">Created {x.taskDate.slice(0,10)} by Guest</p>
+            <p>{x.taskDesc.length >= 50 ? `${x.taskDesc.slice(0,50)}...` : x.taskDesc}</p>
+            <p className={x.taskCompleted == true ? "text-black" : "text-gray-400"}>Created {x.taskDate.slice(0,10)} by Guest</p>
         </div>
-        </article>
+        <button onClick={showTask} data-index={x._id} className="bg-white/50 px-2 shadow-md rounded-lg">View more</button>
+        </div>
     ))}
     </div>
-    <div className="w-3/5">
-        {props.children}
+    <div className="w-2/5 mr-10">
+    <div className={task == "" ? "hidden" : "border-8 bg-white/50"} id="showTask">
+        <Task task={task} todo={todo}/>
+    </div>
+
+    <div className={showTaskForm == false ? "hidden" : "border-8 bg-white/50"}>
+        <NewTaskForm/>
+    </div>
+    </div>
     </div>
     </Layout>
   )

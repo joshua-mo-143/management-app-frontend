@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import HeroImage from '../assets/HeroImage.jpg'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -14,7 +15,11 @@ const Home = () => {
             <span className="text-blue-500">Eliminate</span> problems and 
             <span className="text-blue-500 "> streamline</span> your communication flow
             with our all-in-one app.</h1>
-        <button className="absolute right-0 font-bold bg-blue-500 px-5 text-xl py-2 rounded-xl shadow-xl mt-2">Get started for free</button>
+            <Link to="/about">
+        <button className="absolute right-0 font-bold bg-blue-500 px-5 text-xl py-2 rounded-xl shadow-xl mt-2">
+          Get started for free
+          </button>
+          </Link>
         </div>
     </Layout>
   )

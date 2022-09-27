@@ -1,0 +1,68 @@
+import React from 'react'
+import axios from 'axios'
+
+const Task = (props) => {
+// delete task
+    async function deleteTask(e) {
+        let toDelete = e.target.getAttribute("data-index");
+        let fetchUrl = `http://localhost:3000/tasks/${toDelete}`;
+
+        await axios.delete(fetchUrl, {data: {_id: toDelete}});
+    }
+// complete task
+    async function completeTask(e) {
+        let toComplete = e.target.getAttribute("data-index");
+        let fetchUrl = `http://localhost:3000/tasks/${toComplete}`;
+
+        await axios.patch(fetchUrl, {taskCompleted: true});
+    }
+// undo complete status of task
+    async function undoComplete(e) {
+        let toComplete = e.target.getAttribute("data-index");
+        let fetchUrl = `http://localhost:3000/tasks/${toComplete}`;
+
+        await axios.patch(fetchUrl, {taskCompleted: false});
+    }
+
+  return (
+    <div className="">
+    {props.todo.filter(x => x._id == props.task).map((x) => (
+        // task data
+        <div className="ml-5" key={x._id}>
+            <h1 className="text-2xl mt-10">{x.taskName}</h1>
+            <hr className="my-5 mx-10 border-black"/>
+            <p className="w-4/5 m-auto">{x.taskDesc}</p>
+            <hr className="my-5 mx-10 border-black"/>
+
+            {/* creation info */}
+            <div className="inline-flex flex-row gap-5 items-center pb-5">
+                <div className="text-xs">
+            <p>Created by: Guest</p>
+            <p>Creation date: {x.taskDate.slice(0,10)}</p>
+            </div>
+
+            {/* user options */}
+            <p className="items-center">Options: </p>
+            {x.taskCompleted == true ? 
+            <button className="h-full bg-white inline py-1 px-3 bg-gray-300 font-bold rounded-xl shadow-sm" onClick={undoComplete} data-index={x._id}>Undo complete</button>
+        :
+
+        <button className="h-full inline py-1 px-3 bg-green-500 font-bold rounded-xl shadow-sm" onClick={completeTask} data-index={x._id}>Complete</button>}
+            <button className="h-full bg-white inline py-1 px-3 bg-red-400 font-bold rounded-xl shadow-sm" onClick={deleteTask} data-index={x._id}>Delete</button>
+            </div>
+            
+            {/* comments */}
+            <form className="relative p-3 flex flex-col w-4/5 m-auto">
+                <h1>Want to leave your thoughts?</h1>
+                <textarea cols="110" rows="3" className="my-2"/>
+                <div className="flex justify-end">
+                <button value="submit" type="submit" className="mt-3 relative mr-5 py-2 px-5 rounded-xl font-bold bg-blue-500">Add comment</button>
+                </div>
+            </form>
+        </div>
+    ))}
+    </div>
+  )
+}
+
+export default Task

@@ -18,7 +18,7 @@ const TestimonySlider = () => {
     }
 
   return (
-    <div className="relative w-4/5 h-full m-auto bg-red-500 rounded-xl p-5 pb-10">
+    <div className="relative w-4/5 h-full m-auto bg-red-500 rounded-xl p-5 pb-10 shadow-md">
         {custReviews.filter(x => x.id == sliderIndex).map((x) => (
             <div key={x.id} className="relative">
                 <h1 className="text-center font-bold text-5xl">{x.custName}</h1>
