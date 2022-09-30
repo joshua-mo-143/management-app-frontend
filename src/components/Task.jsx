@@ -1,27 +1,30 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
-
+import authContext from '../context/authContext';
 const Task = (props) => {
+
+    const [auth, setAuth] = useContext(authContext);
+
 // delete task
     async function deleteTask(e) {
         let toDelete = e.target.getAttribute("data-index");
         let fetchUrl = `http://localhost:3000/tasks/${toDelete}`;
 
-        await axios.delete(fetchUrl, {data: {_id: toDelete}});
+        await axios.delete(fetchUrl, {data: {_id: toDelete}}, {headers: {Authorization: auth}, withCredentials: true});
     }
 // complete task
     async function completeTask(e) {
         let toComplete = e.target.getAttribute("data-index");
         let fetchUrl = `http://localhost:3000/tasks/${toComplete}`;
 
-        await axios.patch(fetchUrl, {taskCompleted: true});
+        await axios.patch(fetchUrl, {taskCompleted: true}, {headers: {Authorization: auth}, withCredentials: true});
     }
 // undo complete status of task
     async function undoComplete(e) {
         let toComplete = e.target.getAttribute("data-index");
         let fetchUrl = `http://localhost:3000/tasks/${toComplete}`;
 
-        await axios.patch(fetchUrl, {taskCompleted: false});
+        await axios.patch(fetchUrl, {taskCompleted: false},  {headers: {Authorization: auth}, withCredentials: true});
     }
 
   return (

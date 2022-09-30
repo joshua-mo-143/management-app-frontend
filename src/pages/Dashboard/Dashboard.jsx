@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import axios from 'axios';
 import Layout from '../../components/Layout';
 import Task from '../../components/Task';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NewTaskForm from '../../components/NewTaskForm';
+import authContext from '../../context/authContext';
+import handleAuth from '../../auth';
+import userContext from '../../context/userContext';
 
 const Dashboard = (props) => {
 
@@ -12,6 +15,8 @@ const Dashboard = (props) => {
     const [todo, setTodo] = useState([]);
     const [task, setTask] = useState("");
     const [showTaskForm, toggleTaskForm] = useState(false);
+    const [auth, setAuth] = useContext(authContext);
+    const [user, setUser] = useContext(userContext);
 
     // set vars
     let data;
@@ -34,7 +39,7 @@ const Dashboard = (props) => {
     // send Axios query to API to get data
     useEffect(() => {
         async function getData() {
-            await axios.get(fetchUrl)
+            await axios.get(fetchUrl, {headers: {Authorization: auth}, withCredentials: true})
                   .then(res => {
                       data = res.data;
                       setTodo(data);
@@ -43,7 +48,7 @@ const Dashboard = (props) => {
                   console.error(err);
               })
             }
-            getData();
+            getData()
         },
         [todo]);
 
