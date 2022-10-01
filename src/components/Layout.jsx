@@ -11,7 +11,8 @@ const Layout = (props) => {
 
   useEffect(() => {
     async function meme() {
-      if (localStorage.getItem('jwt') && localStorage.getItem('user')) {
+      if (!auth && !user && localStorage.getItem('jwt') && localStorage.getItem('user')) {
+        
         setAuth('JWT ' + JSON.parse(localStorage.getItem('jwt')));
         setUser(localStorage.getItem('user'));
       }

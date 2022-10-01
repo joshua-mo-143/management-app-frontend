@@ -46,6 +46,7 @@ const Dashboard = (props) => {
     // send Axios query to API to get data
     useEffect(() => {        
         async function getData() {
+            if (auth && user) {
             await axios.get(fetchUrl, {headers: {Authorization: auth, user: user}, withCredentials: true})
                   .then(res => {
                       data = res.data;
@@ -54,7 +55,7 @@ const Dashboard = (props) => {
               .catch(err => {
                   console.error(err);
               })
-            }
+            }}
             getData()
         },
         [todo]);
