@@ -1,20 +1,24 @@
-import { createContext, useState} from 'react'
+import { createContext, useState, useEffect } from 'react'
 import AllRoutes from './pages/AllRoutes'
 import authContext from './context/authContext.jsx'
 import userContext from './context/userContext'
+import handleAuth from './auth'
 
 function App() {
 
   const [auth, setAuth] = useState(null)
   const [user, setUser] = useState(null)
 
-    // this variable forces child context values to only change if original value has been changed
+  useEffect(() => {
+    setAuth('JWT ' + JSON.parse(localStorage.getItem('jwt')));
+    setUser(localStorage.getItem('user'));
+  }, [])
 
   return (
     <authContext.Provider value={[auth, setAuth]}>
-    <userContext.Provider value={[user, setUser]}>
-    <AllRoutes/>
-    </userContext.Provider>
+      <userContext.Provider value={[user, setUser]}>
+        <AllRoutes />
+      </userContext.Provider>
     </authContext.Provider>
   )
 }

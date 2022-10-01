@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {Component, useContext, useEffect, useState} from 'react'
 import axios from 'axios';
 import Layout from '../../components/Layout';
 import Task from '../../components/Task';
@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NewTaskForm from '../../components/NewTaskForm';
 import authContext from '../../context/authContext';
-import handleAuth from '../../auth';
 import userContext from '../../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = (props) => {
 
@@ -18,6 +18,8 @@ const Dashboard = (props) => {
     const [auth, setAuth] = useContext(authContext);
     const [user, setUser] = useContext(userContext);
 
+    const navigate = useNavigate()
+
     // set vars
     let data;
     let fetchUrl = 'http://localhost:3000/tasks';
@@ -27,19 +29,24 @@ const Dashboard = (props) => {
 
         toggleTaskForm(false)
         setTask(e.target.getAttribute("data-index"));
-    }
+    };
 
     const showNewTaskForm = () => {
         setTask("")
         toggleTaskForm(true)
-    }
+    };
 
+    useEffect(() => {
+        if (!auth) {
+            navigate("/");
+        }
+    },[]);
 
 
     // send Axios query to API to get data
-    useEffect(() => {
+    useEffect(() => {        
         async function getData() {
-            await axios.get(fetchUrl, {headers: {Authorization: auth}, withCredentials: true})
+            await axios.get(fetchUrl, {headers: {Authorization: auth, user: user}, withCredentials: true})
                   .then(res => {
                       data = res.data;
                       setTodo(data);
@@ -51,10 +58,11 @@ const Dashboard = (props) => {
             getData()
         },
         [todo]);
-
   return (
-    <Layout>
-    <h1 className="mt-20 text-center font-bold text-3xl">Dashboard - Guest</h1>
+    
+    <Layout> {auth ?
+        <>
+    <h1 className="mt-20 text-center font-bold text-3xl">Dashboard - {user}</h1>
     <div className="flex flex-row mt-5 gap-5 justify-center">
     <div className="flex flex-col gap-5 w-2/5 border border-8 ml-5 pb-5">
             <div className="px-5 py-3 block m-5 mb-0 bg-green-500 shadow-md rounded-xl cursor-pointer" onClick={showNewTaskForm}>
@@ -67,7 +75,7 @@ const Dashboard = (props) => {
                 <h1 className="absolute right-0 font-bold">Completed!</h1> : ""}
             <h2 className="text-3xl">{x.taskName}</h2>
             <p>{x.taskDesc.length >= 50 ? `${x.taskDesc.slice(0,50)}...` : x.taskDesc}</p>
-            <p className={x.taskCompleted == true ? "text-black" : "text-gray-400"}>Created {x.taskDate.slice(0,10)} by Guest</p>
+            <p className={x.taskCompleted == true ? "text-black" : "text-gray-400"}>Created {x.taskDate.slice(0,10)} by {x.taskOwner}</p>
         </div>
         <button onClick={showTask} data-index={x._id} className="bg-white/50 px-2 shadow-md rounded-lg">View more</button>
         </div>
@@ -83,6 +91,10 @@ const Dashboard = (props) => {
     </div>
     </div>
     </div>
+    </>
+    :
+    <h1 className="mt-20 text-5xl text-center">You're not authorised!</h1>
+            }
     </Layout>
   )
 }

@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../components/Layout'
 import HeroImage from '../assets/HeroImage.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import authContext from '../context/authContext'
+import userContext from '../context/userContext'
 
 const Home = () => {
+
+  const navigate = useNavigate();
+  const [auth, setAuth] = useContext(authContext);
+  const [user, setUser] = useContext(userContext);
+
+  useEffect(() => {
+    if (localStorage.getItem('jwt') && localStorage.getItem('user')) {
+      navigate('/dashboard');
+    }
+  },[]);
+
   return (
     <Layout>
         <img src= {HeroImage} className="fixed md: w-screen h-screen object-cover -z-10 pointer-events-none"/>

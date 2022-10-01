@@ -1,10 +1,14 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import axios from 'axios'
+import authContext from '../context/authContext';
+import userContext from '../context/userContext';
 
 const NewTaskForm = () => {
 
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
+    const [auth, setAuth] = useContext(authContext);
+    const [user, setUser] = useContext(userContext);
 
     let fetchUrl = 'http://localhost:3000/tasks';
 
@@ -16,12 +20,17 @@ const NewTaskForm = () => {
         setDesc(e.target.value)
     }
     
-    async function addTask() {
+    async function addTask(e) {
+        e.preventDefault()
         await axios.post(fetchUrl,
             {
                 "taskName": title,
-                "taskDesc": desc
-            })
+                "taskDesc": desc,
+                "taskOwner": user
+                
+            }, {headers: {Authorization: auth, user: user}, withCredentials: true})
+        setTitle("");
+        setDesc("");
     }
 
     return (

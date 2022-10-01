@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useContext} from 'react'
+import React, { Children, useEffect, useContext } from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import authContext from '../context/authContext'
@@ -11,20 +11,18 @@ const Layout = (props) => {
 
   useEffect(() => {
     async function meme() {
-    if (localStorage.getItem('jwt') && localStorage.getItem('user')) {
-  setAuth('JWT '+JSON.parse(localStorage.getItem('jwt')));
-  setUser(localStorage.getItem('user'));
-  console.log(auth);
-  console.log(user);
+      if (localStorage.getItem('jwt') && localStorage.getItem('user')) {
+        setAuth('JWT ' + JSON.parse(localStorage.getItem('jwt')));
+        setUser(localStorage.getItem('user'));
+      }
     }
-  }
-  meme()
-  }, []);
+    meme()
+  }, [window.location]);
 
   return (
     <>
-    <Navbar/>
-    {props.children}
+      <Navbar />
+      {props.children }
     </>
   )
 }
