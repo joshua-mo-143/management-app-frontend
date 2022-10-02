@@ -34,6 +34,7 @@ const Home = () => {
           </button>
           </Link>
         </div>
+        
     </Layout>
   )
 }

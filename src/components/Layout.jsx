@@ -1,8 +1,9 @@
-import React, { Children, useEffect, useContext } from 'react'
+import React, { Children, useEffect, useContext, useState } from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import authContext from '../context/authContext'
 import userContext from '../context/userContext'
+import CookieNotif from './cookieNotif'
 
 const Layout = (props) => {
 
@@ -23,7 +24,8 @@ const Layout = (props) => {
   return (
     <>
       <Navbar />
-      {props.children }
+      {props.children}
+      <CookieNotif/>
     </>
   )
 }

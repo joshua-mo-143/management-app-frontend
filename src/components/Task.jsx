@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import axios from 'axios'
 import authContext from '../context/authContext';
+import CommentsForm from './CommentsForm';
 const Task = (props) => {
 
     const [auth, setAuth] = useContext(authContext);
@@ -53,15 +54,7 @@ const Task = (props) => {
         <button className="h-full inline py-1 px-3 bg-green-500 font-bold rounded-xl shadow-sm" onClick={completeTask} data-index={x._id}>Complete</button>}
             <button className="h-full bg-white inline py-1 px-3 bg-red-400 font-bold rounded-xl shadow-sm" onClick={deleteTask} data-index={x._id}>Delete</button>
             </div>
-            
-            {/* comments */}
-            <form className="relative p-3 flex flex-col w-4/5 m-auto">
-                <h1>Want to leave your thoughts?</h1>
-                <textarea cols="110" rows="3" className="my-2"/>
-                <div className="flex justify-end">
-                <button value="submit" type="submit" className="mt-3 relative mr-5 py-2 px-5 rounded-xl font-bold bg-blue-500">Add comment</button>
-                </div>
-            </form>
+        <CommentsForm/>
         </div>
     ))}
     </div>
