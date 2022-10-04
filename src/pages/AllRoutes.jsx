@@ -7,6 +7,8 @@ import Pricing from './Pricing';
 import Register from './Register';
 import Login from './Login';
 import Tasks from './Dashboard/Tasks';
+import Project from './Dashboard/Project';
+import Teams from './Dashboard/Teams';
 
 const AllRoutes = () => {
 
@@ -20,7 +22,9 @@ const AllRoutes = () => {
             <Route path="/login" element={<Login/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/dashboard/tasks" element={<Tasks/>}/>
-            
+            <Route path="/dashboard/projects/:id" element={<Project/>}/>
+            <Route path="/dashboard/projects/:id/tasks" element={<Tasks/>}/>
+            <Route path="/dashboard/teams/:id" element={<Teams/>}/>
         </Routes>
   )
 }

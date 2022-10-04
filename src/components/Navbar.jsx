@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className="absolute top-0 left-0 m-5 mt-2 text-lg font-bold rounded-2xl">
+    <nav className="fixed top-0 left-0 m-5 mt-2 text-lg font-bold rounded-2xl">
         <ul className="inline-flex gap-5 flex-row justify-around">
         {auth == null || user == null ? 
         <>
