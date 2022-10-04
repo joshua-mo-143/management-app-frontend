@@ -32,7 +32,7 @@ const Login = () => {
                 setAuth('JWT ' + JSON.parse(localStorage.getItem('jwt')));
                 setUser(localStorage.getItem('user'));
                 setSuccess(true);
-                navigate('/dashboard/tasks');
+                navigate('/dashboard');
             })
         .catch(err => {
             console.error(err);
