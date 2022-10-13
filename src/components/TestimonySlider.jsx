@@ -21,7 +21,7 @@ const TestimonySlider = () => {
     <div className="relative w-4/5 h-full m-auto bg-red-500 rounded-xl p-5 pb-10 shadow-md">
         {custReviews.filter(x => x.id == sliderIndex).map((x) => (
             <div key={x.id} className="relative">
-                <h1 className="text-center font-bold text-5xl">{x.custName}</h1>
+                <h1 className="text-center font-bold text-xl md:text-2xl lg:text-5xl">{x.custName}</h1>
                 <div onClick={()=>sliderLeft()} className="absolute top-1/2 bg-white/50 p-5 px-6 rounded-full cursor-pointer">
                 <FontAwesomeIcon icon={faArrowLeft}/>
         </div>
@@ -30,8 +30,8 @@ const TestimonySlider = () => {
                         <img src={x.custImg} className="rounded-full items-center"/>
                     </div>
                     <div className="relative basis-2/4 -ml-20">
-                        <FontAwesomeIcon icon={faQuoteLeft} className="absolute text-6xl -left-20 -top-5"/>
-                            <span className="text-xl" id="testimony">
+                        <FontAwesomeIcon icon={faQuoteLeft} className="absolute text-3xl md:text-6xl -left-20 -top-5"/>
+                            <span className="text-md text-xl" id="testimony">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quibusdam perferendis culpa quidem tempora? Unde repellendus assumenda cumque. Ab distinctio possimus cumque hic impedit, laboriosam magnam sequi nulla repellendus eos harum. Eos itaque consequuntur cumque repudiandae sapiente unde dicta. Quisquam deserunt voluptatibus odio illo perferendis id modi soluta voluptatem omnis ea cupiditate nesciunt ducimus repudiandae at aliquam, eum saepe laudantium molestias ipsum sequi inventore et iure blanditiis. At totam deleniti ab nobis iusto ipsa eveniet cum dolorum optio consectetur iste atque magni impedit, dolorem consequuntur animi alias, molestias soluta quibusdam, reiciendis officiis! Necessitatibus sed tempora nihil sapiente mollitia culpa rerum!
                             </span>
                     </div>

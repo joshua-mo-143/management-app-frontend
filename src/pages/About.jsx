@@ -27,7 +27,7 @@ const About = () => {
                   </button>
                   </Link>
                 </div>
-                <h1 className="text-6xl font-bold text-center pb-5 pt-5 mt-20">See what our customers are saying:</h1>
+                <h1 className="text-xl md:text-3xl lg:text-6xl font-bold text-center pb-5 pt-5 mt-20">See what our customers are saying:</h1>
               <TestimonySlider/>
         </div>
         <div className="p-5"></div>
