@@ -43,19 +43,19 @@ const Register = () => {
     }
     
   return (
-    <form className="flex flex-col text-center w-1/5 m-auto mt-5 lg:mt-64">
+    <form className="flex flex-col justify-center text-center w-1/5 m-auto mt-5 lg:mt-64">
         <h1 className="text-3xl">Register</h1>
         <label for="username" className="block py-3">
-           <span className="float-left">Username:</span> 
-           <input name="username" type="text" id="username" className="float-right" onInput={(e) => setUsername(e.target.value)} value={username} required></input>
+           <span className="lg:float-left">Username:</span> 
+           <input name="username" type="text" id="username" className="lg:float-right w-48" onInput={(e) => setUsername(e.target.value)} value={username} required></input>
         </label>
-        <label for="email" className="block py-3">
-        <span className="float-left">Email:</span> 
-        <input name="email" type="email" id="email" className="float-right" onChange={(e) => setEmail(e.target.value)} value={email} required></input>
+        <label for="email" className=" py-3">
+        <span className="lg:float-left">Email:</span> 
+        <input name="email" type="email" id="email" className="lg:float-right w-48" onChange={(e) => setEmail(e.target.value)} value={email} required></input>
         </label>
         <label for="password" className="block py-3">
-        <span className="float-left">Password:</span> 
-        <input name="password" type="password" id="password" className="float-right" onChange={(e) => setPassword(e.target.value)} value={password} required></input>
+        <span className="lg:float-left">Password:</span> 
+        <input name="password" type="password" id="password" className="lg:float-right w-48" onChange={(e) => setPassword(e.target.value)} value={password} required></input>
         </label>
         <button type="submit" value="submit" className="ml-2 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl" onClick={register}>Submit</button>
         <Link to="/login"><button className="mt-3 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl">I already have an account</button></Link>

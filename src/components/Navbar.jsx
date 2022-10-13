@@ -20,18 +20,18 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className="fixed top-0 left-0 m-5 mt-2 text-lg font-bold rounded-2xl">
-        <ul className="inline-flex gap-5 flex-row justify-around">
+    <nav className="fixed top-0 left-0 m-5 mt-2 text-xs md:text-lg font-bold rounded-2xl">
+        <ul className="inline-flex gap-0 md:gap-5 flex-row justify-around">
         {auth == null || user == null ? 
         <>
         <li className="py-2 px-5 bg-gray-200 rounded-xl shadow-md">
         <Link to="/">Taskify.</Link>
             </li>
             <li className="py-2 px-5 cursor-pointer">
-                <Link to="/about">[ About ]</Link>
+                <Link to="/about">About</Link>
             </li>
             <li className="py-2 px-5 cursor-pointer">
-                <Link to="/pricing">[ Pricing ]</Link>
+                <Link to="/pricing">Pricing</Link>
             </li>
             <li className="bg-blue-500 py-2 px-5 rounded-xl shadow-md cursor-pointer">
                 <Link to="/login">Customer Login</Link>
