@@ -29,8 +29,8 @@ const Teams = () => {
                             <p className="text-lg">{project.projectName}</p>
                             <hr className="border-black "/>
                             <p className="text-md ml-2 h-56">
-                                {project.projectBrief.length > 75 ? 
-                            project.projectBrief.slice(75)+"..." : 
+                                {project.projectBrief.length > 300 ? 
+                            project.projectBrief.slice(0,300)+"..." : 
                             project.projectBrief}</p>
                             <p className="text-sm">Click to view more</p>
                         </div>

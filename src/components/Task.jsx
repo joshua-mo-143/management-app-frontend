@@ -1,22 +1,29 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import axios from 'axios'
 import authContext from '../context/authContext';
-import CommentsForm from './CommentsForm';
 import userContext from '../context/userContext';
 import dataContext from '../context/userDataContext';
+import { useNavigate } from 'react-router-dom';
 
 const Task = (props) => {
+
+    let navigate = useNavigate()
 
     const [auth, setAuth] = useContext(authContext);
     const [user, setUser] = useContext(userContext);
     const [userData, setUserData] = useContext(dataContext);
 
+    useEffect(() => {
+      console.log(auth);
+    }, [])
+    
 // delete task
     async function deleteTask(e) {
         let toDelete = e.target.getAttribute("data-index");
         let fetchUrl = `http://localhost:3000/tasks/${toDelete}`;
 
-        await axios.delete(fetchUrl, {data: {_id: toDelete}}, {headers: {Authorization: auth, user: user}, withCredentials: true});
+        await axios.delete(fetchUrl, {_id: toDelete}, { headers: {Authorization: auth, user: user}, withCredentials: true});
+        
     }
 // complete task
     async function completeTask(e) {
@@ -35,7 +42,7 @@ const Task = (props) => {
 
   return (
     <div className="">
-    {props.todo.filter(x => x._id == props.task).map((x) => (
+    {userData.tasks.filter(x => x._id == props.task).map((x) => (
         // task data
         <div className="ml-5" key={x._id}>
             <h1 className="text-2xl mt-10">{x.taskName}</h1>

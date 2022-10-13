@@ -3,8 +3,16 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import Layout from '../components/Layout'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Pricing = () => {
+
+  let navigate = useNavigate();
+
+  const goRegister = () => {
+    navigate('/register')
+  }
+
   return (
     <Layout>
       <div className="mt-20"></div>
@@ -27,7 +35,7 @@ export const Pricing = () => {
             <li className="text-left text-lg ml-3"><FontAwesomeIcon icon={faCheck} /> Delegate tasks to team members</li>
             <li className="text-left text-lg ml-3"><FontAwesomeIcon icon={faCheck} /> Customer service aftercare</li>
           </ul>
-          <button className="my-5 w-1/2 mx-auto py-2 bg-blue-500 rounded-tl-xl rounded-br-xl">Get started</button>
+          <button className="my-5 m-auto w-1/2 py-2 bg-blue-500 rounded-tl-xl rounded-xl" onClick={goRegister}>Get started</button>
         </div>
 
         {/* premium tier */}
@@ -47,7 +55,7 @@ export const Pricing = () => {
             <li className="text-left text-lg ml-3"><FontAwesomeIcon icon={faCheck} /> Task completion history</li>
             <li className="text-left text-lg ml-3"><FontAwesomeIcon icon={faCheck} /> Ensure your information source is streamlined</li>
           </ul>
-          <button className="my-5 w-1/2 mx-auto py-2 bg-blue-500 rounded-tl-xl rounded-br-xl">Get started</button>
+          <button className="my-5 m-auto w-1/2 py-2 bg-blue-500 rounded-tl-xl rounded-xl" onClick={goRegister}>Get started</button>
         </div>
 
                 {/* Corporate tier */}
@@ -61,7 +69,7 @@ export const Pricing = () => {
           <p className="text-left text-lg ml-3">For that special touch, we're willing to tailor our app to your specification to
           help your company facilitate communication as seamlessly and painlessly as possible. </p>
 
-          <button className="my-5 w-1/2 mx-auto py-2 bg-blue-500 rounded-tl-xl rounded-br-xl">Contact Sales</button>
+          <button className="my-5 w-1/2 mx-auto py-2 bg-blue-500 rounded-tl-xl rounded-xl">Contact Sales</button>
         </div>
 
       </div>

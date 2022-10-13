@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 const Register = () => {
 
     const [username, setUsername] = useState("");
@@ -43,7 +43,7 @@ const Register = () => {
     }
     
   return (
-    <form className="flex flex-col text-center w-1/5 m-auto">
+    <form className="flex flex-col text-center w-1/5 m-auto mt-5 lg:mt-64">
         <h1 className="text-3xl">Register</h1>
         <label for="username" className="block py-3">
            <span className="float-left">Username:</span> 
@@ -57,9 +57,8 @@ const Register = () => {
         <span className="float-left">Password:</span> 
         <input name="password" type="password" id="password" className="float-right" onChange={(e) => setPassword(e.target.value)} value={password} required></input>
         </label>
-        <button type="submit" value="submit" className="ml-2 px-5 py-2 bg-white/50" onClick={register}>Submit</button>
-
-
+        <button type="submit" value="submit" className="ml-2 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl" onClick={register}>Submit</button>
+        <Link to="/login"><button className="mt-3 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl">I already have an account</button></Link>
             <span>{error}</span>
     </form>
   )

@@ -32,7 +32,6 @@ const Layout = (props) => {
       .then((res) => {
           data = res.data;
           setUserData(data)
-          console.log(userData)
       })
   } catch(err) 
   {

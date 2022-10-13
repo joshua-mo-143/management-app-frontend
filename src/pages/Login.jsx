@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import authContext from '../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import userContext from '../context/userContext';
 
 const Login = () => {
@@ -32,7 +32,7 @@ const Login = () => {
                 setAuth('JWT ' + JSON.parse(localStorage.getItem('jwt')));
                 setUser(localStorage.getItem('user'));
                 setSuccess(true);
-                navigate('/dashboard');
+                navigate('/tasks');
             })
         .catch(err => {
             console.error(err);
@@ -42,15 +42,16 @@ const Login = () => {
     }
     
   return (
-    <form className="flex flex-col text-center">
-        <h1 className="text-3xl">Register</h1>
+    <form className="flex flex-col text-center w-1/5 m-auto mt-5 lg:mt-64">
+        <h1 className="text-3xl">Log In</h1>
         <label for="username" className="block py-3">
            Username: <input name="username" type="text" id="username" onChange={(e) => setUsername(e.target.value)} value={username}></input>
         </label>
         <label for="password" className="block py-3">
            Password: <input name="password" type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password}></input>
         </label>
-        <button type="submit" value="submit" className="ml-2 px-5 py-2 bg-white/50" onClick={handleLogin}>Submit</button>
+        <button type="submit" value="submit" className="ml-2 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl" onClick={handleLogin}>Submit</button>
+        <Link to="/register"><button className="mt-3 px-5 py-2 bg-white/50 backdrop-blur-lg shadow-sm rounded-xl">I don't have an account</button></Link>
     </form>
   )
 }

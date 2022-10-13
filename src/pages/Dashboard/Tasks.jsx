@@ -8,11 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NewTaskForm from '../../components/NewTaskForm';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Tasks = () => {
 
     const params = useParams()
     const projectId = params.id;
+
+    let fetchUrl = 'http://localhost:3000/tasks'
 
     // set states
     const [task, setTask] = useState("");
@@ -21,6 +24,7 @@ const Tasks = () => {
     const [auth, setAuth] = useContext(authContext);
     const [user, setUser] = useContext(userContext);
     const [userData, setUserData] = useContext(dataContext);
+    const [tasks, setTasks] = useState([]);
     
     const navigate = useNavigate()
 
@@ -37,12 +41,27 @@ const Tasks = () => {
     };
 
     useEffect(() => {
-        if (!auth || !userData) {
-            navigate("/");
-        }
+        let data;
+        // if (!auth ) {
+        //     navigate("/");
+        // }
 
-        document.scroll = 0
-    },[]);
+        async function getTasks() {
+        if (auth && user) {
+            try {
+        await axios.get(fetchUrl, {headers: {Authorization: auth, user: user}, withCredentials: true})
+        .then((res) => {
+            data = res.data;
+            setTasks(data);
+        })
+    } catch(err) 
+    {
+        console.log(err.message);
+    }
+
+    }}
+    getTasks()
+    ,[tasks]});
 
    return (
     <Layout>
@@ -56,12 +75,12 @@ const Tasks = () => {
     :
     <h1 className="mt-20 text-center font-bold text-3xl">Task List - {user}</h1>}
 
-    <div className="grid grid-cols-1 grid-rows-auto bg-red-500 w-4/5 m-auto rounded-xl px-5 py-3">
+    <div className="grid grid-cols-1 grid-rows-auto bg-red-500 w-4/5 m-auto mt-3 rounded-xl px-5 py-3">
         <div className="col-span-7 row-span-1">
         <h1 className="text-xl font-bold text-center">High Priority Tasks</h1> 
         </div>
         <div className="grid grid-cols-7 grid-rows-1 gap-4">
-            {userData.tasks.filter(x => x.highPriority == true).map(x => (
+            {tasks.filter(x => x.highPriority == true && x.projectId == projectId).map(x => (
         <div key={x._id} className={x.taskCompleted == true ? "w-full h-32 p-3 bg-green-500 rounded-xl shadow-sm col-span-1 p-3 relative" : "relative p-3 w-full h-32 bg-white/50 rounded-xl shadow-sm col-span-1"}>
         <div className="relative block">
             {x.taskCompleted == true ? 
@@ -81,7 +100,7 @@ const Tasks = () => {
                 <h3 className="text-xl ml-5 font-bold"> <FontAwesomeIcon icon={faPlus}/>  Make a new task</h3>
             </div>
     <div className="grid grid-cols-3 grid-rows-auto gap-4">
-    {userData.tasks.filter(x => x.highPriority == false && x.projectId == projectId).map(x => (
+    {tasks.filter(x => x.highPriority == false && x.projectId == projectId).map(x => (
         <div key={x._id} className={x.taskCompleted == true ? "relative h-32 p-3 bg-green-500 rounded-xl shadow-sm" : x.highPriority == true ? "relative h-32 p-3 bg-red-500 rounded-xl shadow-sm" : "relative h-32 p-3 bg-white/50 rounded-xl shadow-sm"}>
         <div className="relative block">
             {x.taskCompleted == true ? 
@@ -96,7 +115,7 @@ const Tasks = () => {
     </div>
     <div className="w-2/5 mr-10">
     <div className={task == "" ? "hidden" : "border-8 bg-white/50"} id="showTask">
-        <Task task={task} todo={userData.tasks}/>
+        <Task task={task} todo={tasks}/>
     </div>
 
     <div className={showTaskForm == false ? "hidden" : "border-8 bg-white/50"}>

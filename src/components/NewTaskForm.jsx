@@ -22,7 +22,6 @@ const NewTaskForm = () => {
     }
     
     async function addTask(e) {
-        let navigate = useNavigate()
         e.preventDefault()
         await axios.post(fetchUrl,
             {
@@ -35,7 +34,6 @@ const NewTaskForm = () => {
             }, {headers: {Authorization: auth, user: user}, withCredentials: true})
         setTitle("");
         setDesc("");
-        navigate(0)
     }
 
     return (

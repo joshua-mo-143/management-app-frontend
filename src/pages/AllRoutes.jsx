@@ -22,9 +22,9 @@ const AllRoutes = () => {
             <Route path="/login" element={<Login/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/dashboard/tasks" element={<Tasks/>}/>
-            <Route path="/dashboard/projects/:id" element={<Project/>}/>
+            {/* <Route path="/dashboard/projects/:id" element={<Project/>}/>
             <Route path="/dashboard/projects/:id/tasks" element={<Tasks/>}/>
-            <Route path="/dashboard/teams/:id" element={<Teams/>}/>
+            <Route path="/dashboard/teams/:id" element={<Teams/>}/> */}
         </Routes>
   )
 }
