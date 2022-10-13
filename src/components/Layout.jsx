@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import authContext from '../context/authContext'
 import userContext from '../context/userContext'
-import CookieNotif from './cookieNotif'
+import CookieNotif from './CookieNotif'
 import dataContext from '../context/userDataContext'
 import axios from 'axios'
 
